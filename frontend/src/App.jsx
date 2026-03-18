@@ -10,7 +10,7 @@ const API = import.meta.env.VITE_API_URL
 const COLORS = ['#6366f1', '#06b6d4', '#10b981']
 
 export default function App() {
-  const [dark, setDark] = useState(true)
+  const [dark, setDark] = useState(false)
   const [token, setToken] = useState(localStorage.getItem('tf_token') || '')
   const [loginInput, setLoginInput] = useState({ user: '', pass: '' })
   const [loginError, setLoginError] = useState('')
@@ -45,17 +45,21 @@ export default function App() {
       fetch(`${API}/api/users`, { headers }).then(r => r.json()),
       fetch(`${API}/api/orders`, { headers }).then(r => r.json()),
     ]).then(([s, r, u, o]) => {
+      if (s.error || r.error || u.error || o.error) {
+        setToken('')
+        localStorage.removeItem('tf_token')
+        return
+      }
       setStats(s)
-      setRevenue(r)
-      setUsers(u)
-      setOrders(o)
+      setRevenue(Array.isArray(r) ? r : [])
+      setUsers(Array.isArray(u) ? u : [])
+      setOrders(Array.isArray(o) ? o : [])
       setLoading(false)
     }).catch(() => {
       setToken('')
       localStorage.removeItem('tf_token')
     })
   }, [authed])
-
   const handleLogin = async () => {
     try {
       const res = await fetch(`${API}/api/login`, {
