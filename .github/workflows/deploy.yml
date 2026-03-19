@@ -8,6 +8,9 @@ jobs:
   deploy-frontend:
     name: Build and deploy frontend
     runs-on: ubuntu-latest
+    if: |
+      contains(toJson(github.event.commits.*.modified), 'frontend/') ||
+      contains(toJson(github.event.commits.*.added), 'frontend/')
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -48,6 +51,9 @@ jobs:
   deploy-backend:
     name: Deploy backend to EC2
     runs-on: ubuntu-latest
+    if: |
+      contains(toJson(github.event.commits.*.modified), 'backend/') ||
+      contains(toJson(github.event.commits.*.added), 'backend/')
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
