@@ -124,7 +124,7 @@ export default function App() {
 
   const statusColor = (s) => {
     if (s === 'completed') return { bg: '#064e3b', text: '#6ee7b7' }
-    if (s === 'pending') return { bg: '#451a03', text: '#fcd34d' }
+    if (s === 'pending') return { bg: '#451a03', text: '#fcd44d' }
     return { bg: '#4c0519', text: '#fca5a5' }
   }
 
