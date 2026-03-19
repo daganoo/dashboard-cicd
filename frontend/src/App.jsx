@@ -198,7 +198,7 @@ export default function App() {
 
   return (
     <div style={{ minHeight: '100vh', background: bg, color: text, fontFamily: 'Inter, sans-serif', transition: 'all 0.3s' }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '32px 16px' }}>
+      <div style={{ maxWidth: 1600, margin: '0 auto', padding: '32px 16px' }}>
 
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32, flexWrap: 'wrap', gap: 12 }}>
